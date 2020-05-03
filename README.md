@@ -1,6 +1,6 @@
 # poke_app
 
-A new Flutter project.
+A Pokemon app made in flutter with Robert C. Martin's Clean Architecture.
 
 ## Getting Started
 
