@@ -24,12 +24,16 @@ dependencies:
   kiwi: ^0.2.0
   #State Management
   mobx: ^1.1.1
+  #Equality Comparisons
+  equatable: ^1.1.1
   dartz: ^0.9.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^4.1.1
+  # json_serializable: ^3.3.0
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -23,6 +23,8 @@ void main() {
     genus: "Transform Pokémon",
     pokeIndex: 132,
     types: ["normal"],
+    imageUrl:
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png",
   );
 
   test(
