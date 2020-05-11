@@ -7,7 +7,7 @@ import 'package:poke_app/features/pokedex/domain/entities/pokemon.dart';
 import '../../../../fixtures/fixture_reader.dart';
 
 void main() {
-  final tPokemonModel = PokemonModel(
+  final pokemonModel = PokemonModel(
     name: "ditto",
     pokeIndex: 132,
     types: ["normal"],
@@ -21,7 +21,7 @@ void main() {
     'should be a subclass of Pokemon entity',
     () async {
       //assert
-      expect(tPokemonModel, isA<Pokemon>());
+      expect(pokemonModel, isA<Pokemon>());
     },
   );
 
@@ -38,7 +38,7 @@ void main() {
       final result = PokemonModel.fromJson(pokemonJsonMap, pokeSpecieJsonMap);
 
       //assert
-      expect(result, tPokemonModel);
+      expect(result, pokemonModel);
     },
   );
 }

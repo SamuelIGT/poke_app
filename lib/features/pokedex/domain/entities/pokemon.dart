@@ -19,6 +19,5 @@ class Pokemon extends Equatable {
   });
 
   @override
-  // TODO: implement props
   List<Object> get props => [name, pokeIndex, types, genus, color, imageUrl];
 }
