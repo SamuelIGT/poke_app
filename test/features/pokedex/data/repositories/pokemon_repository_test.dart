@@ -3,15 +3,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:poke_app/core/error/exceptions.dart';
 import 'package:poke_app/core/error/failure.dart';
-import 'package:poke_app/core/platform/network_info.dart';
+import 'package:poke_app/core/network/network_info.dart';
 import 'package:poke_app/features/pokedex/data/datasource/pokemon_remote_data_source.dart';
 import 'package:poke_app/features/pokedex/data/models/pokemon_model.dart';
 import 'package:poke_app/features/pokedex/data/repositories/pokemon_repository.dart';
 import 'package:poke_app/features/pokedex/domain/entities/pokemon.dart';
 
-class MockRemoteDataSource extends Mock implements PokemonRemoteDataSouce {}
+class MockRemoteDataSource extends Mock implements IPokemonRemoteDataSouce {}
 
-class MockNetworkInfo extends Mock implements NetworkInfo {}
+class MockNetworkInfo extends Mock implements INetworkInfo {}
 
 void main() {
   PokemonRepository repository;
@@ -132,7 +132,8 @@ void main() {
     });
   });
 
-  group('getRandomPokemon', () {
+  group('getPokemonByIndex', () {
+    int pokeIndex = 132;
     final Pokemon pokemon = Pokemon(
       name: "ditto",
       color: "purple",
@@ -157,11 +158,11 @@ void main() {
         'should verify if the device has internet connection',
         () async {
           //arrange
-          when(mockRemoteDataSource.getRandomPokemon())
+          when(mockRemoteDataSource.getPokemonByIndex(pokeIndex))
               .thenAnswer((_) async => pokemonModel);
 
           //act
-          repository.getRandomPokemon();
+          repository.getPokemonByIndex(pokeIndex);
 
           //assert
           verify(mockNetworkInfo.isConnected);
@@ -172,14 +173,14 @@ void main() {
         'should return a pokemon data when the remote data source call is sucessful',
         () async {
           //arrange
-          when(mockRemoteDataSource.getRandomPokemon())
+          when(mockRemoteDataSource.getPokemonByIndex(pokeIndex))
               .thenAnswer((_) async => pokemonModel);
 
           //act
-          Right<Failure, Pokemon> result = await repository.getRandomPokemon();
+          Right<Failure, Pokemon> result = await repository.getPokemonByIndex(pokeIndex);
 
           //assert
-          verify(mockRemoteDataSource.getRandomPokemon());
+          verify(mockRemoteDataSource.getPokemonByIndex(pokeIndex));
           expect(result, Right(pokemon));
           // expect(npokemon, pokemon);
         },
@@ -189,12 +190,12 @@ void main() {
         'should return a ServerFailure when the remote data source call fails',
         () async {
           //arrange
-          when(mockRemoteDataSource.getRandomPokemon())
+          when(mockRemoteDataSource.getPokemonByIndex(pokeIndex))
               .thenThrow(ServerException());
           //act
-          var result = await repository.getRandomPokemon();
+          var result = await repository.getPokemonByIndex(pokeIndex);
           //assert
-          verify(mockRemoteDataSource.getRandomPokemon());
+          verify(mockRemoteDataSource.getPokemonByIndex(pokeIndex));
           expect(result, Left(ServerFailure()));
         },
       );
@@ -204,8 +205,9 @@ void main() {
       test(
         'should return an InternetConnectionFailure when calling a remote data source method',
         () async {
+          
           //act
-          var result = await repository.getRandomPokemon();
+          var result = await repository.getPokemonByIndex(pokeIndex);
 
           //assert
           verifyZeroInteractions(mockRemoteDataSource);

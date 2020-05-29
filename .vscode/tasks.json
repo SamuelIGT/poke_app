@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build and watch",
+            "type": "shell",
+            "command": "flutter pub run build_runner watch",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Build and watch (delete conflicts)",
+            "type": "shell",
+            "command": "flutter pub run build_runner watch --delete-conflicting-outputs",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

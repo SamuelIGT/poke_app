@@ -27,13 +27,20 @@ dependencies:
   #Equality Comparisons
   equatable: ^1.1.1
   dartz: ^0.9.0
+  #Network Connection Check
+  data_connection_checker: ^0.3.4
+  #HTTP Client
+  http: ^0.12.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^4.1.1
-  # json_serializable: ^3.3.0
+  build_runner: ^1.10.0
+  mobx_codegen: ^1.1.0
 
+
+  # json_serializable: ^3.3.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

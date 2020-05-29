@@ -1,17 +1,17 @@
 import 'package:dartz/dartz.dart';
 import 'package:poke_app/core/error/exceptions.dart';
 import 'package:poke_app/core/error/failure.dart';
-import 'package:poke_app/core/platform/network_info.dart';
+import 'package:poke_app/core/network/network_info.dart';
 import 'package:poke_app/features/pokedex/data/datasource/pokemon_remote_data_source.dart';
 import 'package:poke_app/features/pokedex/domain/entities/pokemon.dart';
 import 'package:poke_app/features/pokedex/domain/repositories/i_pokemon_repository.dart';
 import 'package:meta/meta.dart';
 
-typedef Future<Pokemon> _GetPokemonByNameOrRandom();
+typedef Future<Pokemon> _GetPokemonByNameOrIndex();
 
 class PokemonRepository implements IPokemonRepository {
-  final PokemonRemoteDataSouce remoteDataSouce;
-  final NetworkInfo networkInfo;
+  final IPokemonRemoteDataSouce remoteDataSouce;
+  final INetworkInfo networkInfo;
 
   PokemonRepository(
       {@required this.remoteDataSouce, @required this.networkInfo});
@@ -24,14 +24,14 @@ class PokemonRepository implements IPokemonRepository {
   }
 
   @override
-  Future<Either<Failure, Pokemon>> getRandomPokemon() async {
+  Future<Either<Failure, Pokemon>> getPokemonByIndex(int index) async {
     return await _getPokemon(() {
-      return remoteDataSouce.getRandomPokemon();
+      return remoteDataSouce.getPokemonByIndex(index);
     });
   }
 
   Future<Either<Failure, Pokemon>> _getPokemon(
-      _GetPokemonByNameOrRandom getPokemonByNameOrRandom) async {
+      _GetPokemonByNameOrIndex getPokemonByNameOrRandom) async {
     if (await networkInfo.isConnected) {
       try {
         var pokeModel = await getPokemonByNameOrRandom();

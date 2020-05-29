@@ -1,4 +1,3 @@
-import 'package:poke_app/features/pokedex/data/repositories/pokemon_repository.dart';
 import 'package:poke_app/features/pokedex/domain/entities/pokemon.dart';
 import 'package:meta/meta.dart';
 

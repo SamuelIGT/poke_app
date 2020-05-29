@@ -31,7 +31,7 @@ void main() {
     'should get a random pokemon from repository',
     () async {
       //arrange
-      when(mockPokemonRepository.getRandomPokemon())
+      when(mockPokemonRepository.getPokemonByIndex(any))
           .thenAnswer((_) async => Right(pokemon));
 
       //act
@@ -39,7 +39,8 @@ void main() {
 
       //assert
       expect(result, Right(pokemon));
-      verify(mockPokemonRepository.getRandomPokemon());
+
+      verify(mockPokemonRepository.getPokemonByIndex(any));
       verifyNoMoreInteractions(mockPokemonRepository);
     },
   );

@@ -1,0 +1,4 @@
+analyzer:
+  exclude: [build/**, test/*.g.dart, lib/*.g.dart]
+  errors:
+    missing_required_param: error
